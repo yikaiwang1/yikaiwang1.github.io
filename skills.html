@@ -43,18 +43,30 @@
         <li><strong>Archive before every compaction.</strong> A hook copies the full transcript, including subagent
           transcripts, to a folder of your choice before every compaction, whether you type <code>/compact</code> or it
           happens automatically.</li>
-        <li><strong>Compact earlier.</strong> A setup skill sets a smaller auto-compact window, for example 300k tokens
-          instead of close to the 1M limit.</li>
+        <li><strong>Compact earlier.</strong> A setup skill sets a smaller auto-compact window: 500k tokens instead of
+          close to the 1M limit, or a value chosen by a smart analysis of your own sessions.</li>
         <li><strong>Better summaries.</strong> It adds compaction rules to <code>CLAUDE.md</code>: keep the recent work
-          (current task, latest results, files just changed, running jobs) in detail, drop dead ends, and point to the
-          archive for the rest.</li>
+          (current task, latest results, files just changed, running jobs) in detail, write out what screenshots
+          showed, keep warnings such as “placeholder” next to results, drop dead ends, and point to the archive for the
+          rest.</li>
+        <li><strong>Optional smart analysis.</strong> Before you choose, Claude can measure on your own sessions what
+          compacting earlier saves and what it does to the quality of its work: it audits real compactions for things
+          that were lost, replays long stretches of your sessions with compactions at 300k, 400k and 500k, and
+          recommends a window. It tells you the time and tokens first (on my data about one to one and a half hours
+          and 150–260 million tokens), or you skip it and take the default.</li>
       </ul>
-      <p>In my own long research sessions, compacting at 300k tokens instead of near the 1M limit cut the cost by about
-        40–46% (simulated at API prices).</p>
-      <p class="install-label">Install in Claude Code:</p>
-      <pre><code>/plugin marketplace add yikaiwang1/claude-compact-archive
-/plugin install compact-archive@claude-compact-archive</code></pre>
-      <p>Then ask Claude to “set up compaction”.
+      <p>In my own long research sessions, compacting at 500k tokens instead of near the 1M limit cut the cost by about
+        30–36% (300k: 40–46%; simulated at API prices). A single compaction at 300k was no worse than one at 1M, but
+        300k compacts about six times as often, and 500k kept 7–10 percentage points more of the facts needed to carry
+        on than 400k or 300k, at 8–18% higher cost. Hence the 500k default.</p>
+      <p class="install-label">Install from a terminal:</p>
+      <pre><code>claude plugin marketplace add yikaiwang1/claude-compact-archive
+claude plugin install compact-archive@claude-compact-archive</code></pre>
+      <p>Then ask Claude to “set up compaction”. To update later, run
+        <code>claude plugin marketplace update claude-compact-archive</code> and then
+        <code>claude plugin update compact-archive@claude-compact-archive</code>. In the terminal version of Claude Code
+        the <code>/plugin</code> command works too; in the desktop app, <code>/plugin</code> opens the app’s own plugin
+        window instead, so use a terminal.
         <a href="https://github.com/yikaiwang1/claude-compact-archive" target="_blank" rel="noopener">Code and documentation on GitHub →</a></p>
     </section>
 
